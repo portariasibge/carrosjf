@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Mestre: Center Car JF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuração Visual: Cores Calmas, Fontes Grandes -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgPage: '#f0f4f8',
+                        cardWhite: '#ffffff',
+                        txtMain: '#1a202c',
+                        blueSafe: '#2b6cb0',
+                        greenGo: '#2f855a',
+                        yellowWarn: '#d69e2e',
+                        redStop: '#c53030',
+                        purpleAI: '#6b46c1',
+                    },
+                    fontFamily: {
+                        sans: ['Verdana', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f0f4f8; color: #1a202c; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .modal-overlay { background-color: rgba(255, 255, 255, 0.98); }
+        
+        /* Botão pulsante para chamar atenção */
+        .pulse-btn { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(66, 153, 225, 0); } 100% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0); } }
+
+        /* Loading IA */
+        .typing span { display: inline-block; width: 6px; height: 6px; background: #fff; border-radius: 50%; margin: 0 2px; animation: bounce 0.6s infinite alternate; }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { to { transform: translateY(-4px); } }
+    </style>
+</head>
+<body class="pb-32">
+
+    <!-- Cabeçalho Fixo -->
+    <header class="bg-blueSafe text-white sticky top-0 z-50 px-4 py-3 shadow-lg flex justify-between items-center">
+        <div>
+            <h1 class="text-lg font-bold"><i class="fas fa-shield-alt mr-2"></i>Guia de Compra</h1>
+            <p class="text-xs opacity-90">Center Car JF • 60k-80k • Pix</p>
+        </div>
+        <button onclick="togglePanic()" class="bg-white text-blueSafe px-3 py-1 rounded-full text-xs font-bold shadow hover:bg-gray-100 transition">
+            <i class="fas fa-heartbeat mr-1"></i> AJUDA
+        </button>
+    </header>
+
+    <!-- Menu de Navegação -->
+    <nav class="bg-white shadow-md sticky top-14 z-40 overflow-x-auto whitespace-nowrap py-2 px-2 flex space-x-3">
+        <button onclick="nav('ranking')" id="btn-ranking" class="px-4 py-2 rounded-lg bg-blueSafe text-white font-bold text-sm shadow">1. Ranking Top 8</button>
+        <button onclick="nav('lojas')" id="btn-lojas" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-bold text-sm">2. Lista de Lojas</button>
+        <button onclick="nav('roteiro')" id="btn-roteiro" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-bold text-sm">3. Docs & Laudo</button>
+        <button onclick="nav('ia')" id="btn-ia" class="px-4 py-2 rounded-lg bg-purple-100 text-purple-800 font-bold text-sm border border-purple-200">✨ IA Gemini</button>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-4">
+
+        <!-- ABA 1: RANKING -->
+        <div id="tab-ranking" class="tab-content active space-y-6">
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded text-sm text-blue-900">
+                <strong>Como usar:</strong> Clique em "Ver Perguntas" no carro que estiver olhando para saber o que falar ao vendedor.
+            </div>
+
+            <!-- 1. YARIS -->
+            <div class="bg-white rounded-xl shadow border-2 border-green-500 overflow-hidden">
+                <div class="bg-green-600 text-white text-xs font-bold px-3 py-1 text-center">🏆 MELHOR ESCOLHA (Racional)</div>
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Toyota Yaris Sedan</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2018-2020</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Seguro, econômico (CVT), sobe a serra tranquilo. Manutenção barata.</p>
+                    <div class="mt-3 text-xs font-bold text-blue-700 bg-blue-50 p-2 rounded">
+                        <i class="fas fa-map-marker-alt"></i> Procure na: Edrive, Dato.
+                    </div>
+                    <button onclick="toggle('script-yaris')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-yaris" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"Pode me mostrar o manual? Quero ver os carimbos da Toyota (Garantia de 5 anos)."</li>
+                            <li>"O carro já teve batida na traseira? (Para-choque é baixo)."</li>
+                            <li>"O óleo do câmbio CVT foi trocado?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. FIT -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Honda Fit</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2017-2019</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Espaço interno mágico. Mecânica de tanque de guerra. Ótimo de curva.</p>
+                    <button onclick="toggle('script-fit')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-fit" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"Foi feito o Recall do Airbag? (É obrigatório na Honda)."</li>
+                            <li>"Tem barulho seco na suspensão dianteira?"</li>
+                            <li>"O CVT está liso ou dá tranco?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. KICKS -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Nissan Kicks</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2018-2020</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">SUV econômico. Alto do chão. Motor 1.6 honesto para família.</p>
+                    <div class="mt-3 text-xs font-bold text-blue-700 bg-blue-50 p-2 rounded">
+                        <i class="fas fa-map-marker-alt"></i> Procure na: Catedral, Dedé (cuidado KM).
+                    </div>
+                    <button onclick="toggle('script-kicks')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-kicks" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"O volante está descascando? (Peça desconto)."</li>
+                            <li>"A suspensão traseira faz barulho em buracos?"</li>
+                            <li>"O módulo ABS está ok? (Luz no painel)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. ETIOS -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Toyota Etios Sedan</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2017+</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Feio mas inquebrável. Melhor motor da lista. Porta-malas gigante.</p>
+                    <button onclick="toggle('script-etios')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-etios" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"A embreagem está dura? (Dura muito, se estiver ruim peça desconto)."</li>
+                            <li>"Infiltração no porta-malas? (Borracha velha)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. CITY -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Honda City</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2016-2018</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Sedan confortável. Ótimo para viajar Rio-Petrópolis.</p>
+                    <button onclick="toggle('script-city')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-city" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"Mesmas perguntas do Fit (Recall Airbag)."</li>
+                            <li>"Para-choque dianteiro está solto embaixo? (Raspa fácil)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. VERSA -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Nissan Versa V-Drive</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2020-2021</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Maior espaço do mundo. Carro mais novo da lista.</p>
+                    <div class="mt-3 text-xs font-bold text-blue-700 bg-blue-50 p-2 rounded">
+                        <i class="fas fa-map-marker-alt"></i> Procure na: Autoville.
+                    </div>
+                    <button onclick="toggle('script-versa')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-versa" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"Foi Uber? (Olhe o desgaste do banco traseiro)."</li>
+                            <li>"Barulho metálico no escape? (Defletor solto)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. CRETA -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Hyundai Creta 1.6</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2017-2018</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Robusto. Aguenta buraco. Bebe mais que o Kicks, mas é mais forte.</p>
+                    <button onclick="toggle('script-creta')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-creta" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"O motor falha frio? (Bobinas)."</li>
+                            <li>"Barulho de acabamento interno?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. DUSTER -->
+            <div class="bg-white rounded-xl shadow border border-gray-300 overflow-hidden">
+                <div class="p-5">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold text-gray-800">Renault Duster CVT</h2>
+                        <span class="text-xs bg-gray-200 px-2 py-1 rounded font-bold">2018+</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">Trator. Melhor suspensão para rua de terra em Itaipava.</p>
+                    <button onclick="toggle('script-duster')" class="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded text-sm flex justify-between px-4">
+                        <span><i class="fas fa-comment"></i> Ver Perguntas</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-duster" class="hidden bg-gray-50 p-4 text-sm border-t border-gray-200 mt-2">
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>"Direção elétrica ou hidráulica? (Prefira elétrica)."</li>
+                            <li>"O ar gela muito? (Duster tem ar forte)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 2: LOJAS -->
+        <div id="tab-lojas" class="tab-content space-y-6">
+            
+            <!-- Semáforo -->
+            <div class="space-y-4">
+                <div class="bg-white p-4 rounded-xl border-l-8 border-green-500 shadow">
+                    <h3 class="font-bold text-lg text-gray-800">✅ Luz Verde (Vá Primeiro)</h3>
+                    <p class="text-sm text-gray-600">Lojas com estoque de qualidade e boas avaliações.</p>
+                    <ul class="mt-2 text-sm font-bold text-green-700">
+                        <li>• EDRIVE</li>
+                        <li>• AUTOVILLE</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-8 border-yellow-500 shadow">
+                    <h3 class="font-bold text-lg text-gray-800">⚠️ Luz Amarela (Atenção)</h3>
+                    <p class="text-sm text-gray-600">Verifique o laudo com atenção. Bons carros, mas exige cuidado.</p>
+                    <ul class="mt-2 text-sm font-bold text-yellow-700">
+                        <li>• DATO MULTIMARCAS</li>
+                        <li>• CATEDRAL</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl border-l-8 border-red-500 shadow">
+                    <h3 class="font-bold text-lg text-gray-800">🛑 Luz Vermelha (Mecânico Obrigatório)</h3>
+                    <p class="text-sm text-gray-600">Estoque de alto giro e KM alta. Não compre sem inspeção.</p>
+                    <ul class="mt-2 text-sm font-bold text-red-700">
+                        <li>• DEDÉ VEÍCULOS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Diretório Completo (Do PDF) -->
+            <div class="mt-8">
+                <h3 class="font-bold text-gray-700 mb-3 border-b pb-2"><i class="fas fa-address-book mr-2"></i>Lista Completa de Lojas (Center Car)</h3>
+                <div class="bg-white rounded-xl shadow overflow-hidden">
+                    <!-- Lista com Scroll -->
+                    <div class="h-96 overflow-y-auto text-sm divide-y divide-gray-100">
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Auto Certo</span> <span class="text-blue-600">(32) 3237-1725</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Auto Fort</span> <span class="text-blue-600">(32) 3031-1421</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Auto Zero</span> <span class="text-blue-600">(32) 99930-6355</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Autoville</span> <span class="text-green-600 font-bold">(32) 3237-3201</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Bellini Automóveis</span> <span class="text-blue-600">(32) 3237-6027</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Best Motors</span> <span class="text-blue-600">(32) 3237-6125</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Catedral Veículos</span> <span class="text-yellow-600 font-bold">(32) 3237-1303</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Condex Match Car</span> <span class="text-blue-600">(32) 99172-1818</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>CR Automóveis</span> <span class="text-blue-600">(32) 3237-1152</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Dato Multimarcas</span> <span class="text-yellow-600 font-bold">(32) 3237-5037</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Dedé Veículos</span> <span class="text-red-600 font-bold">(32) 4141-1109</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>eDrive</span> <span class="text-green-600 font-bold">(32) 3237-4361</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Gigante Automóveis</span> <span class="text-blue-600">(32) 3237-2475</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Giro Auto</span> <span class="text-blue-600">(32) 98440-4764</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Glauber Veículos</span> <span class="text-blue-600">(32) 3211-0043</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Go! Cars</span> <span class="text-blue-600">(32) 3237-9333</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Grid Veículos</span> <span class="text-blue-600">(32) 4141-1491</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Leandro Veículos</span> <span class="text-blue-600">(32) 98823-0682</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Minas Car</span> <span class="text-blue-600">(32) 3237-1754</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Motor Center</span> <span class="text-blue-600">(32) 99975-9542</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Prime Veículos</span> <span class="text-blue-600">(32) 3237-1767</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Recar Veículos</span> <span class="text-blue-600">(32) 98874-4057</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Rufato Automóveis</span> <span class="text-blue-600">(32) 3015-3454</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Up Hill</span> <span class="text-blue-600">(32) 3237-1104</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Via Sul</span> <span class="text-blue-600">(32) 99912-0203</span></div>
+                        <div class="p-3 hover:bg-gray-50 flex justify-between"><span>Yellow Car</span> <span class="text-blue-600">(32) 3026-6713</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 3: DOCUMENTOS -->
+        <div id="tab-roteiro" class="tab-content space-y-6">
+            <h2 class="font-bold text-xl text-gray-800">O que verificar?</h2>
+            
+            <div class="bg-white rounded-xl shadow p-5 border-l-4 border-purple-600">
+                <h3 class="font-bold text-purple-800 text-lg">1. Laudo Cautelar</h3>
+                <p class="text-sm mb-3">É o raio-x do carro. Exija ver o papel.</p>
+                <div class="space-y-2">
+                    <div class="p-2 bg-green-100 rounded text-green-800 text-sm font-bold"><i class="fas fa-check mr-2"></i> APROVADO: Pode comprar.</div>
+                    <div class="p-2 bg-yellow-100 rounded text-yellow-800 text-sm font-bold"><i class="fas fa-exclamation mr-2"></i> APONTAMENTO: Pintura/Vidro trocado. Peça desconto.</div>
+                    <div class="p-2 bg-red-100 rounded text-red-800 text-sm font-bold"><i class="fas fa-times mr-2"></i> REPROVADO: Estrutura abalada. Foge!</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow p-5 border-l-4 border-blue-600">
+                <h3 class="font-bold text-blue-800 text-lg">2. Manual e Carimbos</h3>
+                <p class="text-sm mb-2">Veja as revisões.</p>
+                <ul class="list-disc ml-4 text-sm space-y-1">
+                    <li>Regra: 1 revisão a cada 10.000 km ou 1 ano.</li>
+                    <li>Exemplo: Carro com 50.000 km tem que ter 5 carimbos (10k, 20k, 30k, 40k, 50k).</li>
+                    <li>Se faltar carimbo, o dono relaxou na manutenção.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ABA 4: IA GEMINI -->
+        <div id="tab-ia" class="tab-content space-y-6">
+            <div class="bg-purple-100 p-4 rounded-xl text-center">
+                <i class="fas fa-robot text-4xl text-purple-600 mb-2"></i>
+                <h2 class="font-bold text-purple-900">Seu Consultor Pessoal</h2>
+                <p class="text-xs text-purple-700">Conectado ao Google para te ajudar.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow">
+                <label class="font-bold text-sm text-gray-700">Analisar Novo Carro:</label>
+                <input type="text" id="ia-carro" placeholder="Ex: Onix 2018, 60mil km, 50 mil reais" class="w-full p-3 border rounded mt-2 mb-3 text-sm">
+                <button onclick="callIA('analise')" class="w-full bg-purpleAI text-white py-3 rounded font-bold text-sm hover:bg-purple-800 transition">
+                    <span id="txt-analise">Analisar Agora</span>
+                    <span id="load-analise" class="hidden typing"><span></span><span></span><span></span></span>
+                </button>
+                <div id="resp-analise" class="hidden mt-4 p-3 bg-gray-50 border-l-4 border-purple-400 text-sm"></div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow">
+                <label class="font-bold text-sm text-gray-700">Ajuda na Negociação:</label>
+                <textarea id="ia-nego" rows="2" placeholder="Ex: O pneu está careca, o que eu falo?" class="w-full p-3 border rounded mt-2 mb-3 text-sm"></textarea>
+                <button onclick="callIA('nego')" class="w-full bg-greenGo text-white py-3 rounded font-bold text-sm hover:bg-green-700 transition">
+                    <span id="txt-nego">Gerar Resposta</span>
+                    <span id="load-nego" class="hidden typing"><span></span><span></span><span></span></span>
+                </button>
+                <div id="resp-nego" class="hidden mt-4 p-3 bg-gray-50 border-l-4 border-green-400 text-sm italic"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal Pânico -->
+    <div id="panic-modal" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-sm p-6 rounded-2xl shadow-2xl text-center border-t-8 border-blueSafe">
+            <i class="fas fa-dove text-4xl text-blueSafe mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Respire.</h2>
+            <div class="bg-blue-50 p-4 rounded-lg text-left text-sm text-gray-700 space-y-2 mb-6">
+                <p>1. Você tem o dinheiro. O poder é seu.</p>
+                <p>2. Ninguém pode te obrigar a nada.</p>
+                <p>3. Se estiver confuso, saia da loja e beba água.</p>
+            </div>
+            <button onclick="togglePanic()" class="w-full bg-blueSafe text-white py-3 rounded-xl font-bold">Estou melhor</button>
+        </div>
+    </div>
+
+    <script>
+        function nav(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            
+            // Botões
+            const ids = ['ranking', 'lojas', 'roteiro', 'ia'];
+            ids.forEach(id => {
+                const btn = document.getElementById('btn-' + id);
+                if(id === tab) {
+                    btn.classList.add('bg-blueSafe', 'text-white', 'shadow');
+                    btn.classList.remove('bg-gray-200', 'text-gray-700', 'bg-purple-100', 'text-purple-800');
+                } else {
+                    if(id === 'ia') btn.className = 'px-4 py-2 rounded-lg bg-purple-100 text-purple-800 font-bold text-sm border border-purple-200';
+                    else btn.className = 'px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-bold text-sm';
+                }
+            });
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function toggle(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        function togglePanic() {
+            const el = document.getElementById('panic-modal');
+            el.classList.toggle('hidden');
+            document.body.style.overflow = el.classList.contains('hidden') ? 'auto' : 'hidden';
+        }
+
+        async function callIA(type) {
+            const apiKey = ""; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            let pUser, pSys, idIn, idOut, idTxt, idLoad;
+
+            if(type === 'analise') {
+                idIn = 'ia-carro'; idOut = 'resp-analise'; idTxt = 'txt-analise'; idLoad = 'load-analise';
+                pSys = "Você é um consultor automotivo. Usuário autista, serra, família. Analise o carro: É bom de serra? Seguro? Preço justo? Seja gentil e direto.";
+                pUser = `Analise: ${document.getElementById(idIn).value}`;
+            } else {
+                idIn = 'ia-nego'; idOut = 'resp-nego'; idTxt = 'txt-nego'; idLoad = 'load-nego';
+                pSys = "Gere UMA frase curta e educada para negociação. Apenas a frase entre aspas.";
+                pUser = `Situação: ${document.getElementById(idIn).value}`;
+            }
+
+            if(!document.getElementById(idIn).value) return alert('Digite algo.');
+
+            document.getElementById(idTxt).classList.add('hidden');
+            document.getElementById(idLoad).classList.remove('hidden');
+
+            try {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: pUser }] }], systemInstruction: { parts: [{ text: pSys }] } })
+                });
+                const data = await res.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Erro.";
+                const div = document.getElementById(idOut);
+                div.innerHTML = text.replace(/\n/g, '<br>');
+                div.classList.remove('hidden');
+            } catch(e) { alert('Erro conexão IA'); }
+            finally {
+                document.getElementById(idTxt).classList.remove('hidden');
+                document.getElementById(idLoad).classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
