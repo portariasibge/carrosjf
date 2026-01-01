@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Mestre: Compra em Juiz de Fora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuração Visual: Cores Calmas e Alto Contraste -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgPage: '#f8f9fa',
+                        cardWhite: '#ffffff',
+                        txtMain: '#1a202c',
+                        blueSafe: '#3182ce',
+                        greenGo: '#38a169',
+                        yellowWarn: '#d69e2e',
+                        redStop: '#e53e3e',
+                        purpleAI: '#805ad5',
+                    },
+                    fontFamily: {
+                        sans: ['Verdana', 'sans-serif'], // Fonte muito legível
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8f9fa; color: #1a202c; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Modal Pânico */
+        .modal-overlay { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); }
+        
+        /* Botão IA */
+        .typing-dot {
+            display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+            background-color: white; animation: type 1.4s infinite ease-in-out both; margin: 0 1px;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes type { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- Cabeçalho de Apoio -->
+    <header class="bg-white border-b sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-sm">
+        <div>
+            <h1 class="text-lg font-bold text-blueSafe"><i class="fas fa-map-marker-alt mr-2"></i>Center Car JF</h1>
+            <p class="text-xs text-gray-500">Missão: Carro para Família/Serra • Pix à vista</p>
+        </div>
+        <button onclick="togglePanic()" class="bg-blue-100 text-blue-900 px-3 py-2 rounded-lg text-sm font-bold border border-blue-200 hover:bg-blue-200 transition">
+            <i class="fas fa-hand-holding-heart mr-1"></i> Pânico / Ajuda
+        </button>
+    </header>
+
+    <!-- Navegação (Abas Grandes) -->
+    <nav class="bg-white border-b px-2 py-2 flex overflow-x-auto space-x-2 sticky top-16 z-40 shadow-md">
+        <button onclick="nav('ranking')" id="btn-ranking" class="flex-shrink-0 bg-blueSafe text-white px-4 py-2 rounded-lg font-bold text-sm shadow">1. Ranking (8 Carros)</button>
+        <button onclick="nav('lojas')" id="btn-lojas" class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-bold text-sm">2. Avaliação Lojas</button>
+        <button onclick="nav('roteiro')" id="btn-roteiro" class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-bold text-sm">3. Roteiro & Laudo</button>
+        <button onclick="nav('ia')" id="btn-ia" class="flex-shrink-0 bg-purple-100 text-purple-800 px-4 py-2 rounded-lg font-bold text-sm border border-purple-200">✨ IA Gemini</button>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-4">
+
+        <!-- ABA 1: RANKING TOP 8 -->
+        <div id="tab-ranking" class="tab-content active space-y-8">
+            
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4 rounded">
+                <p class="text-sm font-bold text-yellow-800">
+                    <i class="fas fa-info-circle"></i> Instrução:
+                </p>
+                <p class="text-sm text-yellow-800">
+                    Abra o card do carro que você está vendo na frente. Clique em "O que perguntar" e leia as perguntas para o vendedor.
+                </p>
+            </div>
+
+            <!-- 1. TOYOTA YARIS -->
+            <div class="bg-white rounded-xl shadow-lg border-2 border-green-500 relative overflow-hidden">
+                <div class="bg-green-500 text-white text-xs font-bold px-3 py-1 absolute top-0 right-0 rounded-bl-lg">#1 A ESCOLHA PERFEITA</div>
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Toyota Yaris Sedan (2018-2020)</h2>
+                    <p class="text-sm text-gray-600 mb-3">Confiabilidade máxima. Sobe a serra suave. Seguro para família.</p>
+                    
+                    <div class="bg-gray-100 p-2 rounded text-xs mb-3">
+                        <strong>🎯 Onde procurar no Center Car:</strong> Lojas <span class="text-blue-700 font-bold">Edrive</span> e <span class="text-blue-700 font-bold">Dato</span>.
+                    </div>
+
+                    <button onclick="toggleScript('script-yaris')" class="w-full bg-blue-50 text-blue-800 py-3 rounded-lg font-bold text-sm border border-blue-200 hover:bg-blue-100 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-yaris" class="hidden bg-blue-50 p-4 pt-0 rounded-b-lg text-sm text-gray-800 border-x border-b border-blue-200">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"Pode me mostrar o manual? Quero ver se as revisões foram feitas na Toyota até hoje (Garantia de 5 anos)."</li>
+                            <li>"O carro já teve batida traseira? (O Yaris é baixo, encosta fácil)."</li>
+                            <li>"O câmbio CVT está trocando o óleo no prazo?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. HONDA FIT -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Honda Fit (2017-2019)</h2>
+                    <p class="text-sm text-gray-600 mb-3">O "Canivete Suíço". Bancos mágicos (muito espaço), mecânica inquebrável, ótimo de curva na serra.</p>
+                    
+                    <button onclick="toggleScript('script-fit')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-fit" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"Foi feito o Recall do Airbag? (Problema famoso da Honda, tem que ter feito)."</li>
+                            <li>"Tem algum barulho na suspensão dianteira? (Fit é durinho, as vezes bate seco)."</li>
+                            <li>"O óleo do câmbio CVT foi trocado a cada 40 mil km?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. NISSAN KICKS -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Nissan Kicks (2018-2020)</h2>
+                    <p class="text-sm text-gray-600 mb-3">O SUV mais econômico. É alto (bom para buracos). Motor 1.6 honesto.</p>
+                    
+                    <div class="bg-gray-100 p-2 rounded text-xs mb-3">
+                        <strong>🎯 Onde procurar:</strong> Lojas <span class="text-blue-700 font-bold">Catedral</span> e <span class="text-yellow-700 font-bold">Dedé</span> (Cuidado com KM alta na Dedé).
+                    </div>
+
+                    <button onclick="toggleScript('script-kicks')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-kicks" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"O volante está descascando? (Acontece muito, peça desconto)."</li>
+                            <li>"A suspensão traseira faz barulho? (Buchas do eixo costumam estourar)."</li>
+                            <li>"O sensor do ABS está funcionando bem? (Luz acesa no painel é defeito comum)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. TOYOTA ETIOS SEDAN -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl">O INQUEBRÁVEL</div>
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Toyota Etios Sedan (2017+)</h2>
+                    <p class="text-sm text-gray-600 mb-3">Não é bonito, mas é o melhor motor da lista. Painel digital (2017+). Porta-malas gigante.</p>
+                    
+                    <button onclick="toggleScript('script-etios')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-etios" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"A embreagem está macia? (No Etios dura muito, se estiver dura, tem algo errado)."</li>
+                            <li>"Tem infiltração de água no porta-malas? (Borracha pode ressecar)."</li>
+                            <li>"Os amortecedores são originais ainda? (Duram muito, mas vale checar)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. HONDA CITY -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Honda City (2016-2018)</h2>
+                    <p class="text-sm text-gray-600 mb-3">Sedan elegante. Muito conforto para viagem Rio-Petrópolis. Mesma mecânica confiável do Fit.</p>
+                    
+                    <button onclick="toggleScript('script-city')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-city" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"O para-choque dianteiro está solto embaixo? (Ele é baixo e raspa fácil)."</li>
+                            <li>"O ar condicionado gela bem no trânsito? (Compressor pode cansar)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. NISSAN VERSA V-DRIVE -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Nissan Versa V-Drive (2020-2021)</h2>
+                    <p class="text-sm text-gray-600 mb-3">Campeão de espaço no banco de trás. Carro mais novo (2021) que você acha nesse preço.</p>
+                    
+                    <div class="bg-gray-100 p-2 rounded text-xs mb-3">
+                        <strong>🎯 Onde procurar:</strong> Loja <span class="text-blue-700 font-bold">Autoville</span> (Tem um 2021 lá).
+                    </div>
+
+                    <button onclick="toggleScript('script-versa')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-versa" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"Foi carro de aplicativo? (Versa é o preferido dos Ubers. Olhe se o banco traseiro está muito gasto)."</li>
+                            <li>"O escapamento está fazendo barulho metálico? (Defletor solta fácil, é barato arrumar, mas peça desconto)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. HYUNDAI CRETA 1.6 -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Hyundai Creta 1.6 (2017)</h2>
+                    <p class="text-sm text-gray-600 mb-3">SUV muito robusto. Aguenta buraco melhor que o Kicks. Bebe um pouco mais, mas é muito forte.</p>
+                    
+                    <button onclick="toggleScript('script-creta')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-creta" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"O motor falha quando está frio? (Bobinas podem dar problema)."</li>
+                            <li>"O acabamento das portas faz barulho? (Grilos internos são comuns)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. RENAULT DUSTER CVT -->
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 relative">
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Renault Duster 1.6 CVT (2018+)</h2>
+                    <p class="text-sm text-gray-600 mb-3">O "Trator". Se sua rua em Itaipava for de terra ruim, esse é o melhor. Suspensão aguenta tudo.</p>
+                    
+                    <button onclick="toggleScript('script-duster')" class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-bold text-sm hover:bg-gray-200 text-left px-4 flex justify-between items-center">
+                        <span><i class="fas fa-comment-dots mr-2"></i> O que perguntar ao vendedor?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="script-duster" class="hidden bg-gray-100 p-4 pt-0 rounded-b-lg text-sm text-gray-800">
+                        <ul class="list-disc ml-4 mt-2 space-y-2">
+                            <li>"A direção é elétrica ou hidráulica? (Evite a hidráulica antiga, é muito pesada)."</li>
+                            <li>"Tem vazamento na direção? (Peça pro mecânico ver, é crônico)."</li>
+                            <li>"O ar condicionado gela muito? (Tem que gelar muito, se não, tem defeito)."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA 2: LOJAS (SEMÁFORO) -->
+        <div id="tab-lojas" class="tab-content space-y-6">
+            <h2 class="text-xl font-bold text-gray-800">Avaliação das Lojas (Center Car)</h2>
+            <p class="text-sm text-gray-600">Baseado no estoque atual e reputação.</p>
+
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded shadow-sm">
+                <h3 class="font-bold text-green-800"><i class="fas fa-check-circle"></i> Luz Verde (Mais Confiáveis)</h3>
+                <ul class="mt-2 space-y-3">
+                    <li class="bg-white p-3 rounded border border-green-100">
+                        <strong>Edrive:</strong> Estoque selecionado, carros com km baixa (Yaris, Virtus novos).
+                    </li>
+                    <li class="bg-white p-3 rounded border border-green-100">
+                        <strong>Autoville:</strong> Loja tradicional, boas avaliações de pós-venda. Tem o Versa 2021.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded shadow-sm">
+                <h3 class="font-bold text-yellow-800"><i class="fas fa-exclamation-circle"></i> Luz Amarela (Atenção)</h3>
+                <ul class="mt-2 space-y-3">
+                    <li class="bg-white p-3 rounded border border-yellow-100">
+                        <strong>Dato Multimarcas:</strong> Tem carros bons, mas verifique se o laudo cautelar está 100% aprovado antes de pagar sinal.
+                    </li>
+                    <li class="bg-white p-3 rounded border border-yellow-100">
+                        <strong>Catedral:</strong> Estoque variado. Olhe bem os pneus e detalhes estéticos.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded shadow-sm">
+                <h3 class="font-bold text-red-800"><i class="fas fa-stop-circle"></i> Luz Vermelha (Cuidado Extra)</h3>
+                <ul class="mt-2 space-y-3">
+                    <li class="bg-white p-3 rounded border border-red-100">
+                        <strong>Dedé Veículos:</strong> Muitos carros com KM alta (perto de 100 mil). Só compre aqui se o SEU mecânico aprovar tudo. Não confie apenas na palavra deles.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ABA 3: ROTEIRO E LAUDO -->
+        <div id="tab-roteiro" class="tab-content space-y-8">
+            
+            <!-- Explicação do Laudo -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-blue-800 mb-3"><i class="fas fa-file-contract"></i> O Santo Graal: Laudo Cautelar</h2>
+                <p class="text-sm text-gray-700 mb-4">Você NÃO compra carro sem ler esse papel. Ele diz se o carro já bateu feio.</p>
+                
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="flex items-center p-3 bg-green-50 border border-green-200 rounded">
+                        <i class="fas fa-check text-green-600 text-xl mr-3"></i>
+                        <div class="text-sm">
+                            <strong>APROVADO:</strong> Pode ir fundo. Estrutura intacta.
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-yellow-50 border border-yellow-200 rounded">
+                        <i class="fas fa-exclamation text-yellow-600 text-xl mr-3"></i>
+                        <div class="text-sm">
+                            <strong>APROVADO COM APONTAMENTO:</strong> Já reparou pintura ou vidro. Peça desconto. O mecânico tem que liberar.
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-red-50 border border-red-200 rounded">
+                        <i class="fas fa-times text-red-600 text-xl mr-3"></i>
+                        <div class="text-sm">
+                            <strong>REPROVADO:</strong> Batida forte ou Leilão. <strong>NÃO COMPRE.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passo a Passo -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 mb-3">Roteiro da Visita</h2>
+                <ol class="relative border-l border-gray-300 ml-3 space-y-6">
+                    <li class="ml-6">
+                        <span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -ml-px ring-8 ring-white font-bold text-blue-800 text-xs">1</span>
+                        <h3 class="font-bold text-gray-900">Chegada</h3>
+                        <p class="text-sm text-gray-600">Vá direto na Edrive ou Autoville. Respire fundo.</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -ml-px ring-8 ring-white font-bold text-blue-800 text-xs">2</span>
+                        <h3 class="font-bold text-gray-900">Olhar o Carro</h3>
+                        <p class="text-sm text-gray-600">Abra o card do carro aqui no app e leia as perguntas para o vendedor.</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute -left-3 flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -ml-px ring-8 ring-white font-bold text-blue-800 text-xs">3</span>
+                        <h3 class="font-bold text-gray-900">A Condição</h3>
+                        <p class="text-sm text-gray-600 italic">"Gostei do carro. Se o Laudo Cautelar estiver aprovado e meu mecânico der ok amanhã, eu pago à vista no Pix."</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- ABA 4: IA GEMINI -->
+        <div id="tab-ia" class="tab-content space-y-6">
+            <div class="bg-purple-50 p-6 rounded-xl border border-purple-200 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <div class="bg-purpleAI text-white w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-purple-900">Assistente Inteligente</h2>
+                        <p class="text-xs text-purple-700">Use para tirar dúvidas na hora.</p>
+                    </div>
+                </div>
+
+                <!-- Analisar -->
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-4">
+                    <label class="text-sm font-bold text-gray-700 block mb-2">Viu um carro diferente?</label>
+                    <input type="text" id="ia-carro" placeholder="Ex: Cobalt 2015, 80mil km, 55 mil reais" class="w-full p-3 border border-gray-300 rounded mb-3 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
+                    <button onclick="chamarIA('analise')" class="w-full bg-purpleAI text-white py-2 rounded font-bold hover:bg-purple-700 transition flex justify-center items-center">
+                        <span id="txt-analise">Analisar se vale a pena</span>
+                        <div id="load-analise" class="hidden"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+                    </button>
+                    <div id="resp-analise" class="hidden mt-3 p-3 bg-gray-50 border-l-4 border-purple-400 text-sm text-gray-800"></div>
+                </div>
+
+                <!-- Negociar -->
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <label class="text-sm font-bold text-gray-700 block mb-2">O vendedor falou algo difícil?</label>
+                    <textarea id="ia-nego" rows="2" placeholder="Ex: Ele disse que o pneu careca é normal." class="w-full p-3 border border-gray-300 rounded mb-3 text-sm focus:ring-2 focus:ring-purple-400 outline-none"></textarea>
+                    <button onclick="chamarIA('negociar')" class="w-full bg-greenGo text-white py-2 rounded font-bold hover:bg-green-700 transition flex justify-center items-center">
+                        <span id="txt-nego">O que eu respondo?</span>
+                        <div id="load-nego" class="hidden"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+                    </button>
+                    <div id="resp-nego" class="hidden mt-3 p-3 bg-gray-50 border-l-4 border-green-400 text-sm text-gray-800 italic"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL DE PÂNICO -->
+    <div id="modal-panico" class="fixed inset-0 z-50 hidden modal-overlay flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border-t-8 border-blueSafe p-6 text-center transform transition-all scale-100">
+            <i class="fas fa-shield-alt text-4xl text-blueSafe mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Você está Seguro.</h2>
+            <div class="text-left bg-blue-50 p-4 rounded-lg mb-6 space-y-3 border border-blue-100">
+                <p class="text-gray-700 text-sm">1. O dinheiro é <strong>SEU</strong>. O poder é <strong>SEU</strong>.</p>
+                <p class="text-gray-700 text-sm">2. Se sentir pressão, diga: <em>"Vou tomar uma água e pensar"</em>. Saia da loja.</p>
+                <p class="text-gray-700 text-sm">3. Você não precisa decidir hoje. Amanhã as lojas estarão lá.</p>
+            </div>
+            <button onclick="togglePanic()" class="w-full bg-blueSafe text-white py-3 rounded-xl font-bold hover:bg-blue-700 text-lg shadow-lg">
+                Estou melhor, voltar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Navegação
+        function nav(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Scroll para o topo suave
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Visual dos botões
+            const buttons = ['ranking', 'lojas', 'roteiro', 'ia'];
+            buttons.forEach(btn => {
+                const el = document.getElementById('btn-' + btn);
+                if(btn === tabId) {
+                    el.classList.add('bg-blueSafe', 'text-white', 'shadow');
+                    el.classList.remove('bg-gray-100', 'text-gray-700', 'bg-purple-100', 'text-purple-800');
+                } else {
+                    if (btn === 'ia') {
+                        el.className = "flex-shrink-0 bg-purple-100 text-purple-800 px-4 py-2 rounded-lg font-bold text-sm border border-purple-200";
+                    } else {
+                        el.className = "flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-bold text-sm";
+                    }
+                }
+            });
+        }
+
+        // Scripts Expansíveis
+        function toggleScript(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        // Pânico
+        function togglePanic() {
+            const el = document.getElementById('modal-panico');
+            el.classList.toggle('hidden');
+            document.body.style.overflow = el.classList.contains('hidden') ? 'auto' : 'hidden';
+        }
+
+        // IA Gemini
+        async function chamarIA(tipo) {
+            const apiKey = ""; // Será preenchido automaticamente
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            let promptUser, promptSystem, inputId, resId, txtId, loadId;
+
+            if (tipo === 'analise') {
+                inputId = 'ia-carro'; resId = 'resp-analise'; txtId = 'txt-analise'; loadId = 'load-analise';
+                promptSystem = "Você é um consultor automotivo. O usuário é autista, mora na serra (Itaipava) e tem família. Analise o carro. Seja direto: É bom de serra? É seguro? Preço está justo? Responda em tópicos curtos e gentis.";
+                promptUser = `Analise este carro: ${document.getElementById(inputId).value}`;
+            } else {
+                inputId = 'ia-nego'; resId = 'resp-nego'; txtId = 'txt-nego'; loadId = 'load-nego';
+                promptSystem = "Você ajuda em negociação. Gere UMA frase curta, educada e firme para o usuário ler ao vendedor. Apenas a frase entre aspas.";
+                promptUser = `Situação: ${document.getElementById(inputId).value}`;
+            }
+
+            const valor = document.getElementById(inputId).value;
+            if (!valor) return alert("Digite algo primeiro.");
+
+            document.getElementById(txtId).classList.add('hidden');
+            document.getElementById(loadId).classList.remove('hidden');
+            document.getElementById(resId).classList.add('hidden');
+
+            try {
+                const req = await fetch(url, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptUser }] }],
+                        systemInstruction: { parts: [{ text: promptSystem }] }
+                    })
+                });
+                const data = await req.json();
+                const texto = data.candidates?.[0]?.content?.parts?.[0]?.text || "Erro na IA.";
+                
+                const div = document.getElementById(resId);
+                div.innerHTML = texto.replace(/\n/g, '<br>');
+                div.classList.remove('hidden');
+            } catch (e) {
+                alert("Erro de conexão. Tente novamente.");
+            } finally {
+                document.getElementById(txtId).classList.remove('hidden');
+                document.getElementById(loadId).classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
